@@ -1,215 +1,276 @@
 import React, { useState } from 'react';
 
-// Define the AYOBA colors
-const ayobaColors = {
-  primary: '#34b7f1', // Light blue
-  secondary: '#1e90ff', // Dark blue
-  accent: '#ffffff' // White
-};
-
-const categories = {
-  eng: {
-    Technology: 'Technology',
-    Finance: 'Finance',
-    Marketing: 'Marketing',
-    Healthcare: 'Healthcare',
-    Education: 'Education'
+const translations = {
+  en: {
+    welcome: "WELCOME TO AYOBA BIZ CONNECT!",
+    language: "LANGUAGE",
+    searchPlaceholder: "Search...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['SPORTS', 'BEAUTY', 'ENTERTAINMENT', 'FURNITURE', 'FASHION', 'EDUCATIONAL']
   },
-  sw: {
-    Technology: 'Teknolojia',
-    Finance: 'Fedha',
-    Marketing: 'Masoko',
-    Healthcare: 'Afya',
-    Education: 'Elimu'
-  },
+  // Other translations...
   zu: {
-    Technology: 'Ubuchwepheshe',
-    Finance: 'Izimali',
-    Marketing: 'Ukumaketha',
-    Healthcare: 'Impilo',
-    Education: 'Imfundo'
-  },
-  ha: {
-    Technology: 'Fasaha',
-    Finance: 'Kudi',
-    Marketing: 'Talla',
-    Healthcare: 'Lafiya',
-    Education: 'Ilimi'
-  },
-  yo: {
-    Technology: 'Imọ-ẹrọ',
-    Finance: 'Owo',
-    Marketing: 'Iṣowo',
-    Healthcare: 'Ìlera',
-    Education: 'Ẹ̀kọ́'
-  },
-  am: {
-    Technology: 'ቴክኖሎጂ',
-    Finance: 'ገንዘብ',
-    Marketing: 'ግብይት',
-    Healthcare: 'ጤና',
-    Education: 'ትምህርት'
+    welcome: "SIYAKWAMUKELA KU AYOBA BIZ CONNECT!",
+    language: "ULIMI",
+    searchPlaceholder: "Sesha...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['EZEMIDLALO', 'UBUHLE', 'OKWEMIDLALO', 'IFANITHA', 'IMFASHINI', 'IMFUNDO']
   }
 };
 
-const africanLanguages = [
-  {name: 'English', code: 'eng'},
-  { name: 'Swahili', code: 'sw' },
-  { name: 'Zulu', code: 'zu' },
-  { name: 'Hausa', code: 'ha' },
-  { name: 'Yoruba', code: 'yo' },
-  { name: 'Amharic', code: 'am' }
-];
-
-// A dummy translation function (you would replace this with an actual translation library or API call)
-const translate = (text, languageCode) => {
-  const translations = {
-    eng: {
-      'Business Categories': 'Business Categories',
-      'This is a pop-up ad.': 'This is a pop-up ad.',
-      'Close': 'Close'
-
-    },
-    sw: {
-      'Business Categories': 'Makundi ya Biashara',
-      'This is a pop-up ad.': 'Hii ni tangazo linalojitokeza.',
-      'Close': 'Funga'
-    },
-    zu: {
-      'Business Categories': 'Izigaba Zebhizinisi',
-      'This is a pop-up ad.': 'Lena yisikhangiso esivela phezulu.',
-      'Close': 'Vala'
-    },
-    ha: {
-      'Business Categories': 'Rukunan Kasuwanci',
-      'This is a pop-up ad.': 'Wannan talla ce ta faɗowa.',
-      'Close': 'Rufe'
-    },
-    yo: {
-      'Business Categories': 'Ẹ̀ka Ìṣòwò',
-      'This is a pop-up ad.': 'Èyí ni ìpolówó tó ń jẹ́.',
-      'Close': 'Tí'
-    },
-    am: {
-      'Business Categories': 'የንግድ ምድቦች',
-      'This is a pop-up ad.': 'ይህ ማስታወቂያ ነው.',
-      'Close': 'ዝጋ'
-    }
-  };
-  return translations[languageCode][text] || text;
+const videoAds = {
+  SPORTS: ['videos/sport1.mp4', 'videos/sport2.mp4'],
+  BEAUTY: ['videos/beauty1.mp4', 'videos/beauty2.mp4'],
+  ENTERTAINMENT: ['videos/entertainment1.mp4', 'videos/entertainment2.mp4'],
+  FURNITURE: ['videos/furniture1.mp4', 'videos/furniture2.mp4'],
+  FASHION: ['videos/fashion1.mp4', 'videos/fashion2.mp4'],
+  EDUCATIONAL: ['videos/educational1.mp4', 'videos/educational2.mp4']
 };
 
 const UserDashboard = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(africanLanguages[0].code);
-  const [showAd, setShowAd] = useState(true);
-  const [translatedTexts, setTranslatedTexts] = useState({
-    categoriesTitle: translate('Business Categories', selectedLanguage),
-    adText: translate('This is a pop-up ad.', selectedLanguage),
-    closeText: translate('Close', selectedLanguage)
-  });
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [currentVideo, setCurrentVideo] = useState(null);
 
-  const handleLanguageChange = (e) => {
-    const languageCode = e.target.value;
-    setSelectedLanguage(languageCode);
-    setTranslatedTexts({
-      categoriesTitle: translate('Business Categories', languageCode),
-      adText: translate('This is a pop-up ad.', languageCode),
-      closeText: translate('Close', languageCode)
-    });
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+    setCurrentVideo(null); // Reset the current video when the category changes
   };
 
-  const closeAd = () => {
-    setShowAd(false);
+  const handleLanguageChange = (event) => {
+    setSelectedLanguage(event.target.value);
+  };
+
+  const handleVideoClick = (videoSrc) => {
+    setCurrentVideo(videoSrc);
   };
 
   return (
-    <div>
-      <nav style={{ 
-        background: `linear-gradient(90deg, ${ayobaColors.primary} 0%, ${ayobaColors.secondary} 100%)`, 
-        padding: '1em', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'space-between' 
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <div style={styles.logoContainer}>
           <img 
-            src="src/ayobalogo.png" // Make sure the path to your logo is correct
+            src="src/ayobalogo.png" // Update with the correct path to your logo
             alt="Ayoba Logo" 
-            style={{ height: '60px', marginRight: '1em' }}
+            style={styles.logo}
           />
         </div>
-        <h1 style={{ color: 'white', textAlign: 'center', flexGrow: 1 }}>AyobaBizHub Dashboard</h1>
-        <div>
-          <label style={{ color: 'white', marginRight: '0.5em' }}>Select Language:</label>
-          <select value={selectedLanguage} onChange={handleLanguageChange} style={{
-            padding: '0.5em',
-            borderRadius: '5px',
-            border: 'none',
-            outline: 'none'
-          }}>
-            {africanLanguages.map(language => (
-              <option key={language.code} value={language.code}>{language.name}</option>
-            ))}
+        <h1 style={styles.title}>{translations[selectedLanguage].welcome}</h1>
+      </header>
+      <div style={styles.languageSearchContainer}>
+        <div style={styles.languageContainer}>
+          <span style={styles.languageText}>{translations[selectedLanguage].language}</span>
+          <select value={selectedLanguage} onChange={handleLanguageChange} style={styles.languageDropdown}>
+            <option value="en">English</option>
+            <option value="af">Afrikaans</option>
+            <option value="am">Amharic</option>
+            <option value="ha">Hausa</option>
+            <option value="lg">Luganda</option>
+            <option value="rw">Kinyarwanda</option>
+            <option value="so">Somali</option>
+            <option value="st">Sesotho</option>
+            <option value="sw">Swahili</option>
+            <option value="ts">Tsonga</option>
+            <option value="tn">Setswana</option>
+            <option value="ve">Venda</option>
+            <option value="xh">Xhosa</option>
+            <option value="yo">Yoruba</option>
+            <option value="zu">Zulu</option>
           </select>
         </div>
-      </nav>
-      <div style={{ backgroundColor: ayobaColors.accent, color: 'black' }}>
-        <div style={{ padding: '2em' }}>
-          <h2>{translatedTexts.categoriesTitle}</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em' }}>
-            {Object.keys(categories[selectedLanguage]).map(category => (
-              <div key={category} style={{
-                border: `1px solid ${ayobaColors.primary}`,
-                borderRadius: '5px',
-                padding: '1em',
-                width: '150px',
-                textAlign: 'center',
-                backgroundColor: ayobaColors.secondary,
-                color: 'white',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                cursor: 'pointer',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.3)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-              }}>
-                {categories[selectedLanguage][category]}
-              </div>
-            ))}
-          </div>
+        <div style={styles.searchContainer}>
+          <input type="text" placeholder={translations[selectedLanguage].searchPlaceholder} style={styles.searchInput} />
+          <button style={styles.searchButton}>🔍</button>
         </div>
       </div>
-      {showAd && (
-        <div style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          backgroundColor: 'white',
-          border: `1px solid ${ayobaColors.secondary}`,
-          padding: '1em',
-          borderRadius: '5px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-          transition: 'opacity 0.3s ease-in-out',
-        }}>
-          <p>{translatedTexts.adText}</p>
-          <button onClick={closeAd} style={{
-            backgroundColor: ayobaColors.primary,
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            padding: '0.5em 1em',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ease',
-          }}>{translatedTexts.closeText}</button>
+      <div style={styles.mainContent}>
+        <div style={styles.bizHubContainer}>
+          <h2 style={styles.bizHubTitle}>{translations[selectedLanguage].bizhub}<span style={styles.hubTitle}>{translations[selectedLanguage].hub}</span></h2>
+          <ul style={styles.categoriesList}>
+            {translations[selectedLanguage].categories.map((category) => (
+              <li
+                key={category}
+                onClick={() => handleCategoryClick(category)}
+                style={{
+                  ...styles.categoryItem,
+                  color: selectedCategory === category ? 'red' : 'white'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'red';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = selectedCategory === category ? 'red' : 'white';
+                }}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
+        <div style={styles.advertisementContainer}>
+          {selectedCategory && videoAds[selectedCategory].map((videoSrc) => (
+            <video
+              key={videoSrc}
+              src={videoSrc}
+              controls
+              style={styles.adVideo}
+              onClick={() => handleVideoClick(videoSrc)}
+            />
+          ))}
+          {currentVideo && (
+            <div style={styles.videoPlayerContainer}>
+              <video src={currentVideo} controls autoPlay style={styles.videoPlayer} />
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+const styles = {
+  container: {
+    backgroundColor: '#ffffff',
+    fontFamily: 'Arial, sans-serif'
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '1em 2em',
+    backgroundColor: '#ffffff',
+    color: '#005bb5',
+    position: 'relative'
+  },
+  logoContainer: {
+    position: 'absolute',
+    left: '1em',
+    display: 'flex',
+    alignItems: 'center'
+  },
+  logo: {
+    height: '60px',
+    marginRight: '1em'
+  },
+  title: {
+    margin: '0',
+    fontSize: '2em',
+    fontWeight: 'bold'
+  },
+  languageSearchContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    padding: '1em 2em',
+    backgroundColor: '#ffffff',
+    color: '#ffd700'
+  },
+  languageContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '1em'
+  },
+  languageText: {
+    fontSize: '1em',
+    fontWeight: 'bold',
+    marginRight: '0.5em'
+  },
+  languageDropdown: {
+    padding: '0.5em',
+    borderRadius: '5px',
+    border: '1px solid #ffd700',
+    backgroundColor: '#fff',
+    color: '#000',
+    outline: 'none'
+  },
+  searchContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  searchInput: {
+    padding: '0.5em',
+    borderRadius: '5px',
+    border: '1px solid #ffd700',
+    outline: 'none',
+    marginRight: '0.5em'
+  },
+  searchButton: {
+    padding: '0.5em',
+    border: '1px solid #ffd700',
+    backgroundColor: '#ffd700',
+    color: '#ffffff',
+    cursor: 'pointer',
+    borderRadius: '5px'
+  },
+  mainContent: {
+    display: 'flex',
+    padding: '2em',
+    gap: '2em'
+  },
+  bizHubContainer: {
+    backgroundColor: '#005bb5',
+    padding: '1em',
+    borderRadius: '10px',
+    color: '#ffffff',
+    flex: '1'
+  },
+  bizHubTitle: {
+    fontSize: '2em',
+    marginBottom: '1em',
+    color: '#ffd700'
+  },
+  hubTitle: {
+    color: '#ffffff'
+  },
+  categoriesList: {
+    listStyleType: 'none',
+    padding: '0'
+  },
+  categoryItem: {
+    fontSize: '1.2em',
+    marginBottom: '0.5em',
+    cursor: 'pointer',
+    transition: 'color 0.3s',
+  },
+  advertisementContainer: {
+    backgroundColor: '#005bb5',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: '2',
+    gap: '1em',
+    borderRadius: '10px'
+  },
+  adVideo: {
+    width: '100%',
+    borderRadius: '10px',
+    cursor: 'pointer'
+  },
+  videoPlayerContainer: {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 1000,
+    backgroundColor: '#000',
+    padding: '10px',
+    borderRadius: '10px'
+  },
+  videoPlayer: {
+    width: '80vw',
+    height: '80vh',
+    borderRadius: '10px'
+  },
+  videoPlayerClose: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    color: '#fff',
+    fontSize: '1.5em',
+    cursor: 'pointer'
+  }
+};
 
 export default UserDashboard;
+
