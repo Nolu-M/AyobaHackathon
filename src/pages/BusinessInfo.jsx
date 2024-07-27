@@ -3,7 +3,7 @@
 const BusinessInfo = () => {
   return (
     <div>
-      
+    
     </div>
   )
 }
