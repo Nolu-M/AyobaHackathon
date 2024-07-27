@@ -1,22 +1,58 @@
-import express from 'express';
-import cors from 'cors';
-const app = express();
-const port = 5000;
+import axios from 'axios';
 
-app.use(cors());
 
-// Mock data
-const analyticsData = {
-  totalAdClicks: 1200,
-  totalReviews: 300,
-  averageRating: 4.5,
-  // Add more data as needed
+// Function to get access token
+const getAccessToken = async () => {
+  try {
+    const response = await axios.post('https://api.chenosis.io/oauth/client/accesstoken?grant_type=client_credentials', null, {
+      headers: {
+        'Authorization': `Basic ${Buffer.from('fNd5mzGSXf5u4OqeQQagMAEaKvwsS77G:j0ynQ7MQ4yRYRC1G').toString('base64')}`,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+    return response.data.access_token;
+  } catch (error) {
+    console.error('Error getting access token:', error.response?.data || error.message);
+    throw error;
+  }
 };
 
-app.get('/api/analytics', (req, res) => {
-  res.json(analyticsData);
-});
+// Function to send message
+const sendMessage = async (accessToken, message, msisdns) => {
+  try {
+    const response = await axios.post('https://api.chenosis.io/ayoba/com/v1/business/message', {
+      message: message,
+      msisdns: msisdns
+    }, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error sending message:', error.response?.data || error.message);
+    throw error;
+  }
+};
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+// Main function to get token and send message
+const main = async () => {
+  try {
+    const accessToken = await getAccessToken();
+    console.log('Access Token:', accessToken); // Debugging line to verify access token
+    const message = {
+      type: 'text',
+      text: 'Hello second message!'
+    };
+    const msisdns = [
+      '+27682237174'
+    ];
+    const result = await sendMessage(accessToken, message, msisdns);
+    console.log('Message sent successfully:', result);
+  } catch (error) {
+    console.error('Failed to send message:', error);
+  }
+};
+
+main();
