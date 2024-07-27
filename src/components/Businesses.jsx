@@ -1,6 +1,6 @@
 
 
-const Signup = () => {
+const Businesses = () => {
   return (
     <div>
       
@@ -8,6 +8,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
-
-
+export default Businesses
