@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import BusinessNav from "../components/BusinessNav";
 import axios from 'axios';
-import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:5000');
 
 const BusinessChat = () => {
   const [messages, setMessages] = useState([]);
@@ -13,13 +10,6 @@ const BusinessChat = () => {
 
   useEffect(() => {
     fetchMessages();
-    socket.on('receiveMessage', (data) => {
-      setMessages(prevMessages => [...prevMessages, data]);
-    });
-
-    return () => {
-      socket.off('receiveMessage');
-    };
   }, []);
 
   const fetchMessages = async () => {
@@ -36,7 +26,12 @@ const BusinessChat = () => {
     try {
       await axios.post('http://localhost:5000/api/sendMessage', newMessage);
       setMessages(prevMessages => [...prevMessages, newMessage]);
-      socket.emit('sendMessage', newMessage);
+      // Call Chenosis/Ayoba API to send the message
+      await axios.post('https://api.ayoba.me/v1/messages', {
+        sender: 'Business',
+        receiver: selectedUser,
+        message
+      });
       setMessage('');
       setShowPopup(false);
     } catch (error) {

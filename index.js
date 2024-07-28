@@ -6,7 +6,7 @@ const getAccessToken = async () => {
   try {
     const response = await axios.post('https://api.chenosis.io/oauth/client/accesstoken?grant_type=client_credentials', null, {
       headers: {
-        'Authorization': `Basic ${Buffer.from('fNd5mzGSXf5u4OqeQQagMAEaKvwsS77G:j0ynQ7MQ4yRYRC1G').toString('base64')}`,
+        'Authorization': `Basic ${Buffer.from('RucWmN0k7A08CFKaBlawYgyfUwkn6aKo:s6GDcck1NDsODz4L').toString('base64')}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
@@ -43,10 +43,10 @@ const main = async () => {
     console.log('Access Token:', accessToken); // Debugging line to verify access token
     const message = {
       type: 'text',
-      text: 'Hello second message!'
+      text: 'Hello nolubabalo!'
     };
     const msisdns = [
-      '+27682237174'
+      '+27780697781'
     ];
     const result = await sendMessage(accessToken, message, msisdns);
     console.log('Message sent successfully:', result);

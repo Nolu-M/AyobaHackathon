@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import AyobaLogo from '../assets/ayoba-logo.png'
+
 
 const translations = {
   en: {
@@ -51,11 +54,11 @@ const UserDashboard = () => {
     <div style={styles.container}>
       <header style={styles.header}>
         <div style={styles.logoContainer}>
-          <img 
-            src="src/ayobalogo.png" // Update with the correct path to your logo
+          <Link to="/"><img 
+            src={AyobaLogo} // Update with the correct path to your logo
             alt="Ayoba Logo" 
             style={styles.logo}
-          />
+          /></Link>
         </div>
         <h1 style={styles.title}>{translations[selectedLanguage].welcome}</h1>
       </header>
