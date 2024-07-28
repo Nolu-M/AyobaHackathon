@@ -12,7 +12,110 @@ const translations = {
     hub: "HUB",
     categories: ['SPORTS', 'BEAUTY', 'ENTERTAINMENT', 'FURNITURE', 'FASHION', 'EDUCATIONAL']
   },
-  // Other translations...
+  af: {
+    welcome: "WELKOM BY AYOBA BIZ CONNECT!",
+    language: "TAAL",
+    searchPlaceholder: "Soek...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['SPORT', 'SKOONHEID', 'VERMAAK', 'MEUBELS', 'MODE', 'ONDERWYS']
+  },
+  am: {
+    welcome: "እንኳን ወደ AYOBA BIZ CONNECT በሰላም መጡ!",
+    language: "ቋንቋ",
+    searchPlaceholder: "ፈልግ...",
+    bizhub: "ቢዝ",
+    hub: "ሀብ",
+    categories: ['ስፖርት', 'ውበት', 'መዝናኛ', 'የቤት ቁሳቁሶች', 'ፋሽን', 'ትምህርት']
+  },
+  ha: {
+    welcome: "BARKA DA ZUWA AYOBA BIZ CONNECT!",
+    language: "HARSHE",
+    searchPlaceholder: "Nema...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['WASANNI', 'KYAU', 'NISANTA', 'KAYAN GIDA', 'FASHION', 'ILIMI']
+  },
+  lg: {
+    welcome: "TUKUWA AYOBA BIZ CONNECT!",
+    language: "LUGHA",
+    searchPlaceholder: "Laba...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['EBYOKUKWATAKO', 'OBULUNGI', 'EMIZANNYO', 'EBYUMA', 'FASIONI', 'OBUYIIYA']
+  },
+  rw: {
+    welcome: "IKAZE KURI AYOBA BIZ CONNECT!",
+    language: "URURIMI",
+    searchPlaceholder: "Shakisha...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['IMIKINO', 'UBWIZA', 'IMYIDAGADURO', 'IBICURUZWA BYA GIKORESHO', 'IMIDELI', 'UBUREZI']
+  },
+  so: {
+    welcome: "KU SOO DHAWOOW AYOBA BIZ CONNECT!",
+    language: "LUGAHA",
+    searchPlaceholder: "Raadi...",
+    bizhub: "GANACSI",
+    hub: "HUB",
+    categories: ['CIYAARAHA', 'QURUXDA', 'MADADAALO', 'AGABKA GURIGA', 'FASHION', 'WAXBARASHO']
+  },
+  st: {
+    welcome: "AMOHELA HO AYOBA BIZ CONNECT!",
+    language: "PUO",
+    searchPlaceholder: "Batla...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['LIPAPALI', 'BOTLE', 'BOITHABISO', 'FURNITURE', 'FESHENE', 'THUTO']
+  },
+  sw: {
+    welcome: "KARIBU KWA AYOBA BIZ CONNECT!",
+    language: "LUGHA",
+    searchPlaceholder: "Tafuta...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['MICHEZO', 'UZURI', 'BURUDANI', 'SAMANI', 'MITINDO', 'ELIMU']
+  },
+  ts: {
+    welcome: "AMUKELANI KU AYOBA BIZ CONNECT!",
+    language: "RIMU",
+    searchPlaceholder: "Swi Komba...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['MITILO', 'KUHLULA', 'MITILO', 'FURNITURE', 'MODYULO', 'DYA']
+  },
+  tn: {
+    welcome: "AMOHELANG GO AYOBA BIZ CONNECT!",
+    language: "PUI",
+    searchPlaceholder: "Batla...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['DIRAETSANA', 'BOJANG', 'THABISO', 'DITIRO TSA GALE', 'FESHENE', 'THUTO']
+  },
+  ve: {
+    welcome: "NI VHUKHUVHANI AYOBA BIZ CONNECT!",
+    language: "LULIMI",
+    searchPlaceholder: "Huwelela...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['MITSHINA', 'VHUAMI', 'KHEFUNELO', 'MATHA', 'FESHINI', 'EDUCATION']
+  },
+  xh: {
+    welcome: "WAMKELEKILE KWI AYOBA BIZ CONNECT!",
+    language: "ULWIMI",
+    searchPlaceholder: "Khangela...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['IMIDLALO', 'UBUHLE', 'IMIDIYO', 'IFURNITURE', 'IMIKHOSI', 'EZEMFUNDO']
+  },
+  yo: {
+    welcome: "KAABO SI AYOBA BIZ CONNECT!",
+    language: "EDE",
+    searchPlaceholder: "Wá ṣàwárí...",
+    bizhub: "BIZ",
+    hub: "HUB",
+    categories: ['Ere-idaraya', 'Ẹwà', 'Idárayá', 'Ẹ̀kúnrẹ́rẹ́ Ilé', 'Àṣà', 'Ẹ̀kọ́']
+  },
   zu: {
     welcome: "SIYAKWAMUKELA KU AYOBA BIZ CONNECT!",
     language: "ULIMI",
@@ -66,21 +169,7 @@ const UserDashboard = () => {
         <div style={styles.languageContainer}>
           <span style={styles.languageText}>{translations[selectedLanguage].language}</span>
           <select value={selectedLanguage} onChange={handleLanguageChange} style={styles.languageDropdown}>
-            <option value="en">English</option>
-            <option value="af">Afrikaans</option>
-            <option value="am">Amharic</option>
-            <option value="ha">Hausa</option>
-            <option value="lg">Luganda</option>
-            <option value="rw">Kinyarwanda</option>
-            <option value="so">Somali</option>
-            <option value="st">Sesotho</option>
-            <option value="sw">Swahili</option>
-            <option value="ts">Tsonga</option>
-            <option value="tn">Setswana</option>
-            <option value="ve">Venda</option>
-            <option value="xh">Xhosa</option>
-            <option value="yo">Yoruba</option>
-            <option value="zu">Zulu</option>
+            {/* Add your language options here */}
           </select>
         </div>
         <div style={styles.searchContainer}>
@@ -113,15 +202,19 @@ const UserDashboard = () => {
           </ul>
         </div>
         <div style={styles.advertisementContainer}>
-          {selectedCategory && videoAds[selectedCategory].map((videoSrc) => (
-            <video
-              key={videoSrc}
-              src={videoSrc}
-              controls
-              style={styles.adVideo}
-              onClick={() => handleVideoClick(videoSrc)}
-            />
-          ))}
+          {selectedCategory && videoAds[selectedCategory] && Array.isArray(videoAds[selectedCategory]) ? (
+            videoAds[selectedCategory].map((videoSrc) => (
+              <video
+                key={videoSrc}
+                src={videoSrc}
+                controls
+                style={styles.adVideo}
+                onClick={() => handleVideoClick(videoSrc)}
+              />
+            ))
+          ) : (
+            <p>No videos available for the selected category.</p>
+          )}
           {currentVideo && (
             <div style={styles.videoPlayerContainer}>
               <video src={currentVideo} controls autoPlay style={styles.videoPlayer} />
