@@ -8,6 +8,7 @@ import AdManagement from './pages/AdManagement'
 import BusinessAnalytics from './pages/BusinessAnalytics'
 import BusinessChat from './pages/BusinessChat'
 import BusinessForum from './pages/BusinessForum'
+import BusinessPage from './pages/BusinessPage';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <Route path='/business-analytics' element={<BusinessAnalytics />} />
         <Route path='/business-chat' element={<BusinessChat />} />
         <Route path='/business-forum' element={<BusinessForum />} />
-        
+        <Route path='/business-page' element={<BusinessPage />} />
       </Routes>
     </div>
   )
