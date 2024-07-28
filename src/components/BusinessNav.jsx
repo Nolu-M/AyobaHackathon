@@ -4,7 +4,7 @@ import AyobaLogo from '../assets/ayoba-logo.png'
 
 const BusinessNav = () => {
     return (
-        <div className="">
+        <div className="container mx-auto">
             <div className="flex justify-between p-4">
                 <Link to='/'><img src={AyobaLogo} alt="ayoba logo" className="w-44"/></Link>
                 <Link to='/'>

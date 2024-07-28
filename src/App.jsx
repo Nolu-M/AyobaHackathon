@@ -15,7 +15,7 @@ function App() {
   
 
   return (
-    <div className='container mx-auto'>
+    <div className=''>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/user-dashboard' element={<UserDashboard />} />
