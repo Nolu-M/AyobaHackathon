@@ -127,7 +127,7 @@ const translations = {
 };
 
 const videoAds = {
-  SPORTS: ['videos/sport1.mp4', 'videos/sport2.mp4'],
+  SPORTS: ['../assets/Gatorade.mp4', 'videos/sport2.mp4'],
   BEAUTY: ['videos/beauty1.mp4', 'videos/beauty2.mp4'],
   ENTERTAINMENT: ['videos/entertainment1.mp4', 'videos/entertainment2.mp4'],
   FURNITURE: ['videos/furniture1.mp4', 'videos/furniture2.mp4'],
