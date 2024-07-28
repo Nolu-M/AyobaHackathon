@@ -7,6 +7,7 @@ const BusinessChat = () => {
   const [message, setMessage] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const accessToken = 'YOUR_ACCESS_TOKEN'; // Replace with your actual access token
 
   useEffect(() => {
     fetchMessages();
@@ -24,14 +25,22 @@ const BusinessChat = () => {
   const sendMessage = async () => {
     const newMessage = { sender: 'Business', receiver: selectedUser, message };
     try {
+      // Save the message locally
       await axios.post('http://localhost:5000/api/sendMessage', newMessage);
       setMessages(prevMessages => [...prevMessages, newMessage]);
+
       // Call Chenosis/Ayoba API to send the message
-      await axios.post('https://api.ayoba.me/v1/messages', {
+      await axios.post('https://api.chenosis.io/ayoba/com/v1/business/message', {
         sender: 'Business',
         receiver: selectedUser,
         message
+      }, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
       });
+
       setMessage('');
       setShowPopup(false);
     } catch (error) {
