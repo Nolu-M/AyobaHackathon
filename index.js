@@ -6,7 +6,7 @@ const getAccessToken = async () => {
   try {
     const response = await axios.post('https://api.chenosis.io/oauth/client/accesstoken?grant_type=client_credentials', null, {
       headers: {
-        'Authorization': `Basic ${Buffer.from('amBrq3DaJmbsZtCGoUQL67uOcc0X1UD7:L9bEqGhCbEcbzM6v').toString('base64')}`,
+        'Authorization': `Basic ${Buffer.from('0tkSrLVwLniynmr7cJArhWIYPGlrdkh1:NGhk2GU52SVRYXT9').toString('base64')}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
